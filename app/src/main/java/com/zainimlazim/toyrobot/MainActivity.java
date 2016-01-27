@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
         } else errorMessage("Please place toy robot");
     }
 
-    public String getOrientation(){
+    public String getOrientation(){//convert orientation params to String (NORTH, SOUTH, etc...)
 
         if(robot.getRotation()%360 == 0){
             return "NORTH";
@@ -275,10 +275,11 @@ public class MainActivity extends AppCompatActivity {
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+        //Lock screen orientation
 
-        robot = (ImageView)findViewById(R.id.robot);
-        editTextX = (EditText) findViewById(R.id.editTextX);
-        editTextY = (EditText) findViewById(R.id.editTextY);
+        robot = (ImageView)findViewById(R.id.robot);         //setting up toy robot
+        editTextX = (EditText) findViewById(R.id.editTextX); //setting up X
+        editTextY = (EditText) findViewById(R.id.editTextY); //setting up Y
 
 
     }
