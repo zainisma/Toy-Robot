@@ -94,52 +94,52 @@ public class MainActivity extends AppCompatActivity {
 
     public void place (View view){
 
-        toyRobotIsActive = true;
+        toyRobotIsActive = true;//enable all buttons for interaction with toy robot
 
-        EditText editTextF = (EditText) findViewById(R.id.editTextF);
+        EditText editTextF = (EditText) findViewById(R.id.editTextF);//Edittext setup for 'F'
         String placeFStr = editTextF.getText().toString();
 
         System.out.println(placeX + ", " + placeY
-                + ", " + orientation + ", " + angleF + ", " + placeFStr);
+                + ", " + orientation + ", " + angleF + ", " + placeFStr);//Chk params in Logs
 
 
-        placeXStr = editTextX.getText().toString();
+        placeXStr = editTextX.getText().toString();//X and Y edittext to string
         placeYStr = editTextY.getText().toString();
 
-        if (placeXStr.matches("") || placeYStr.matches("")) {
-            errorMessage("You did not\nenter a number for X and Y");
-            toyRobotIsActive = false;
+        if (placeXStr.matches("") || placeYStr.matches("")) {       //chk for X,Y input by user
+            errorMessage("You did not\nenter a number for X and Y");//error if field(s) is/are empty
+            toyRobotIsActive = false;                               //Deactivate all buttons
             return;
 
         }else if (Integer.parseInt(placeXStr)>5 || Integer.parseInt(placeXStr)<1 ||
             Integer.parseInt(placeYStr)>5 || Integer.parseInt(placeYStr)<1) {
 
-            errorMessage("Out of Bounds");
-            toyRobotIsActive = false;
+            errorMessage("Out of Bounds");//If toy robot placed outside of table, prompt error
+            toyRobotIsActive = false;     //and Deactivate all buttons
             return;
         }
 
-        if (placeFStr.matches("")) {
-
-            errorMessage("You did not\nenter a direction for F");
-            toyRobotIsActive = false;
+        if (placeFStr.matches("")) {                             //chk for XF input by user
+            errorMessage("You did not\nenter a direction for F");//error if field is empty
+            toyRobotIsActive = false;                            //Deactivate all buttons
             return;
         }
 
-        placeX = Integer.parseInt(placeXStr);
+        placeX = Integer.parseInt(placeXStr);// X,Y String to Integer
         placeY = Integer.parseInt(placeYStr);
 
-        setOrientation(editTextF);
+        setOrientation(editTextF);  //use method/class declared above to assign correct param
+                                    //based on USER String input
 
-        robot.setTranslationX(perUnitX * (placeX - 1));
-        robot.setTranslationY(-perUnitY * (placeY - 1));
-        robot.setRotation(angleF);
+        robot.setTranslationX(perUnitX * (placeX - 1));//Set X for toy robot on table
+        robot.setTranslationY(-perUnitY * (placeY - 1));//Set Y for toy robot on table
+        robot.setRotation(angleF);                      //Set F for toy robot on table
 
         System.out.println(placeX + ", " + placeY
-                + ", " + orientation + ", " + angleF + ", " + placeFStr);
+                + ", " + orientation + ", " + angleF + ", " + placeFStr);//Chk param in logs
 
-        setPlace.setVisibility(View.INVISIBLE);
-        robot.setVisibility(View.VISIBLE);
+        setPlace.setVisibility(View.INVISIBLE); //clear Text Field screen
+        robot.setVisibility(View.VISIBLE);      //and show robot on table/grid
 
     }
 
