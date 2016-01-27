@@ -148,14 +148,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (toyRobotIsActive){//only run code after PLACE is DONE
 
-            if (orientation == 0) {//Facing North
+            if (orientation == 0) {//Move while Facing North
 
                 if((robot.getTranslationY()/perUnitY*(-1)) >=4) {
-                    System.out.println("Out of Bounds");
+                    System.out.println("Out of Bounds");//Chk Error in Logs
                     errorMessage("Out of Bounds");//Error display to user via Toast
                 } else {
                     robot.animate().translationYBy(-perUnitY).setDuration(50);
-                }
+                }   //move robot 1 unit
 
             } else if (orientation == 3 || orientation == -1) {//Facing West
                 if((robot.getTranslationX()/perUnitX) <= 0) {
@@ -183,60 +183,62 @@ public class MainActivity extends AppCompatActivity {
                     robot.animate().translationXBy(perUnitX).setDuration(50);
                 }
             }
-        } else errorMessage("Please place toy robot");
+        } else errorMessage("Please place toy robot");  //button not active if
+    }                                                   //robot not placed on table/grid
 
 
-    }
-
-    public void rotateLeft (View view){
+    public void rotateLeft (View view){                         //onClick for LEFT Button
 
         if (toyRobotIsActive) {
 
-            robot.animate().rotationBy(-90f).setDuration(50);
+            robot.animate().rotationBy(-90f).setDuration(50);   //turn toy robot LEFT
 
-            rotateLeft--;
+            rotateLeft--;                                       //counter to determine orientation
             System.out.println("rotateLeft " + rotateLeft);
-            System.out.println("rotateLeft + rotateRight = " + orientation(rotateLeft, rotateRight));
+            System.out.println("rotateLeft + rotateRight = "
+                    + orientation(rotateLeft, rotateRight));    //chk params in Logs
 
         } else errorMessage("Please place toy robot");
     }
 
-    public void rotateRight (View view){
+    public void rotateRight (View view){                         //onClick for RIGHT Button
 
         if (toyRobotIsActive) {
 
-            robot.animate().rotationBy(90f).setDuration(50);
+            robot.animate().rotationBy(90f).setDuration(50);     //turn toy robot LEFT
 
-            rotateRight++;
+            rotateRight++;                                       //counter to determine orientation
             System.out.println("rotateRight " + rotateRight);
-            System.out.println("rotateLeft + rotateRight = " + orientation(rotateLeft, rotateRight));
+            System.out.println("rotateLeft + rotateRight = "
+                    + orientation(rotateLeft, rotateRight));
 
         } else errorMessage("Please place toy robot");
     }
 
-    public void rotate180 (View view){
+    public void rotate180 (View view){                          //onClick for TURN AROUND Button
 
         if (toyRobotIsActive) {
 
-            robot.animate().rotationBy(180f).setDuration(50);
+            robot.animate().rotationBy(180f).setDuration(50);   //turn toy robot AROUND (180')
 
-            rotateRight += 2;
+            rotateRight += 2;                                   //counter to determine orientation
             System.out.println("rotateRight " + rotateRight);
-            System.out.println("rotateLeft + rotateRight = " + orientation(rotateLeft, rotateRight));
+            System.out.println("rotateLeft + rotateRight = "
+                    + orientation(rotateLeft, rotateRight));
 
         } else errorMessage("Please place toy robot");
     }
 
-    public void report (View view) {
+    public void report (View view) {                            //onClick for REPORT Button
 
         if (toyRobotIsActive) {
 
-            System.out.println("(X,Y,F) =  " + "("
+            System.out.println("(X,Y,F) =  " + "("              //chk params n logs
                     + (1 + robot.getTranslationX() / perUnitX) + ", "
                     + (-1 + robot.getTranslationY() / perUnitY) * (-1) + ", "
                     + (robot.getRotation() % 360) + ")");
 
-            errorMessage("(X,Y,F) =  " + "("
+            errorMessage("(X,Y,F) =  " + "("                    //display (X,Y,F) to user via Toast
                     + (1 + robot.getTranslationX() / perUnitX) + ", "
                     + (-1 + robot.getTranslationY() / perUnitY) * (-1) + ", "
                     + getOrientation() + ")");
