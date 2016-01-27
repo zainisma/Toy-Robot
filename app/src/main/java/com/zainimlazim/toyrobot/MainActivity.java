@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     boolean toyRobotIsActive = false;
 
-    public void errorMessage(String CustomErrorMessage){
-
+    public void errorMessage(String CustomErrorMessage){//common error message template using toast.
+                                                        //it takes String Input for customized error
         Toast toast = Toast.makeText(this, CustomErrorMessage, Toast.LENGTH_SHORT);
         TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
         if( v != null) v.setGravity(Gravity.CENTER);
@@ -46,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
         return;
     }
 
-    public Integer orientation(Integer rotateLeft, Integer rotateRight){
-        orientation = (rotateLeft + rotateRight)%4;
-        return orientation;
+    public Integer orientation(Integer rotateLeft, Integer rotateRight){//common template that
+        orientation = (rotateLeft + rotateRight)%4; //uses modulus or remainder to determine
+        return orientation;                         //the orientation of the toy robot
     }
 
-    public void setOrientation(EditText facingCompass){
-
+    public void setOrientation(EditText facingCompass){ //interpret user String input into Int param
+                                                        //for use in orienting toy robot during PLACE
         if (facingCompass.getText().toString().matches("NORTH")) {
             orientation = 0;
             rotateRight = orientation;
@@ -78,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
             return;
     }
 
-    public void setPlace(View view){
-
+    public void setPlace(View view){//Brings up the Text Field interface for
+                                    // X, Y, F input by user
         setPlace = (RelativeLayout)findViewById(R.id.setPlaceRelativeLayout);
         setPlace.setVisibility(View.VISIBLE);
 
-        orientation = 0;
+        orientation = 0;  // resets all params before new placement
         angleF = 0;
         rotateRight = 0;
         rotateLeft = 0;
@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-
         if (placeFStr.matches("")) {
 
             errorMessage("You did not\nenter a direction for F");
@@ -145,15 +144,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void move (View view){
+    public void move (View view){//onClick for move button
 
-        if (toyRobotIsActive){
+        if (toyRobotIsActive){//only run code after PLACE is DONE
 
             if (orientation == 0) {//Facing North
 
                 if((robot.getTranslationY()/perUnitY*(-1)) >=4) {
                     System.out.println("Out of Bounds");
-                    errorMessage("Out of Bounds");
+                    errorMessage("Out of Bounds");//Error display to user via Toast
                 } else {
                     robot.animate().translationYBy(-perUnitY).setDuration(50);
                 }
